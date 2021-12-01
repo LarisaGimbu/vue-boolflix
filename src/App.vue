@@ -2,7 +2,10 @@
   <div id="app">
     <Header @sendSearch="foundFilm"/>
     <Loader v-if="this.loading"/>
-    <Main :films="films"/>
+    <Main 
+    v-if="films.length !== 0 || series.length !== 0"
+    :films="films"
+    :series="series"/>
   </div>
 </template>
 
@@ -22,7 +25,8 @@ export default {
   data(){
     return{
       films: [],
-      apiURL: 'https://api.themoviedb.org/3/search/movie?',
+      series: [],
+      apiURL: 'https://api.themoviedb.org/3/search/',
       apiKey: '9e3e0024fc20b93902720482485f2a3e',
       loading: false
     }
@@ -32,12 +36,22 @@ export default {
       this.loading = true;
 
       axios 
-        .get(`${this.apiURL}api_key=${this.apiKey}&query=${titolo}&language=it-IT`)
+        .get(`${this.apiURL}movie?api_key=${this.apiKey}&query=${titolo}&language=it-IT`)
         .then((response) =>{
           this.films = response.data.results;
-          console.log(response);
           this.loading = false;
           
+        })
+        .catch((error) =>{
+          console.log(error);
+        })
+
+      axios
+        .get(`${this.apiURL}tv?api_key=${this.apiKey}&query=${titolo}&language=it-IT`)
+        .then((response) =>{
+          this.series = response.data.results;
+          this.loading = false;
+
         })
         .catch((error) =>{
           console.log(error);
