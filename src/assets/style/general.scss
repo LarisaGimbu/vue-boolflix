@@ -3,5 +3,7 @@
 @import '~@fontsource/montserrat/700.css';
 
 body{
+  min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
+  background-image: linear-gradient(to bottom, black 5%, rgb(80, 79, 79) 10%);
 }
