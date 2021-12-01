@@ -6,7 +6,9 @@
     :key="index">
       <p><strong>Titolo:</strong> {{film.title}}</p>
       <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
-      <p><strong>Lingua originale:</strong> {{film.original_language}}</p> 
+      <p v-if="film.original_language==='it'"><strong>Lingua originale:</strong> <img src="../assets/img/it-flag.jpg" alt=""></p> 
+      <p v-else-if="film.original_language==='en'"><strong>Lingua originale:</strong> <img src="../assets/img/eng-flag.png" alt=""></p> 
+      <p v-else><strong>Lingua originale:</strong> {{film.original_language}}</p> 
       <p><strong>Voto:</strong> {{film.vote_average}}</p> 
     </div>
   </main>
@@ -14,17 +16,19 @@
 
 <script>
 
-
 export default {
   name: 'Main',
   data(){
     return{
-      
+     
     }
   },
   props:{
     films: Array,
   },
+  methods:{
+ 
+  }
   
 }
 </script>
@@ -33,6 +37,9 @@ export default {
 main{
   .box{
     width: 200px;
+    img{
+      width: 20px;
+    }
   }
 }
 </style>
