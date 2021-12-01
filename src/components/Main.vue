@@ -13,36 +13,19 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 
 export default {
   name: 'Main',
   data(){
     return{
-      films: [],
-      apiURL: 'https://api.themoviedb.org/3/search/movie?',
-      apiKey: '9e3e0024fc20b93902720482485f2a3e',
-      titleFilm: 'ritorno+al+futuro'
+      
     }
   },
-
-  methods:{
-    getApi(){
-      axios 
-        .get(`${this.apiURL}api_key=${this.apiKey}&query=${this.titleFilm}`)
-        .then((response) =>{
-          this.films = response.data.results;
-
-          
-        })
-        .catch((error) =>{
-          console.log(error);
-        })
-    }
+  props:{
+    films: Array
   },
-  mounted(){
-    this.getApi()
-  }
+  
 }
 </script>
 
