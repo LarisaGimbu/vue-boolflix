@@ -20,13 +20,16 @@ export default {
   data(){
     return{
       films: [],
+      apiURL: 'https://api.themoviedb.org/3/search/movie?',
+      apiKey: '9e3e0024fc20b93902720482485f2a3e',
+      titleFilm: 'ritorno+al+futuro'
     }
   },
 
   methods:{
     getApi(){
-      axios
-        .get('https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&query=ritorno+al+futuro')
+      axios 
+        .get(`${this.apiURL}api_key=${this.apiKey}&query=${this.titleFilm}`)
         .then((response) =>{
           this.films = response.data.results;
 
