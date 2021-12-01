@@ -23,7 +23,7 @@ export default {
     }
   },
   props:{
-    films: Array
+    films: Array,
   },
   
 }
