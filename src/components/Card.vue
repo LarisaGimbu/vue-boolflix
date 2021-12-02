@@ -10,7 +10,7 @@
       <span v-for="(star, index) in stars" :key="index">
         <i class="fas fa-star"></i>
       </span>
-      <span v-for="(emptyStar, index) in emptyStars" :key="index">
+      <span v-for="(emptyStar, index) in emptyStars" :key="`star${index}`">
         <i class="far fa-star"></i>
       </span>
     </p> 
@@ -29,7 +29,7 @@ export default {
   },
   data(){
     return{
-      cardImage : `https://image.tmdb.org/t/p/w342${this.image}`,
+      cardImage : '',
       starsNumber: 0,
       stars: [],
       emptyStars:[]
@@ -38,8 +38,6 @@ export default {
   methods:{
     voteStars(vote){
       this.starsNumber = Math.ceil(vote/2);
-      console.log('Questo è il voto in decimali',vote);
-      console.log('Questo è il voto diviso due',this.starsNumber);
 
       for(let i=1; i<= (this.starsNumber); i++){
         this.stars.push(i)
@@ -47,13 +45,19 @@ export default {
       for(let i=1; i<= (5-this.starsNumber); i++){
         this.emptyStars.push(i)
       }
-
-      console.log('queste sono le stelle piene', this.stars);
-      console.log('queste sono le stelle vuote', this.emptyStars);
+    },
+    cardPoster(){
+      if(this.image != undefined){
+        this.cardImage = `https://image.tmdb.org/t/p/w342${this.image}`;
+        
+      }else{
+        this.cardImage = 'https://m.media-amazon.com/images/I/41n1xmnsn8L._AC_.jpg';
+      }
     }
   },
   mounted(){
     this.voteStars(this.vote)
+    this.cardPoster()
   }
 }
 </script>
