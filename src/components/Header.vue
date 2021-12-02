@@ -13,6 +13,15 @@
       class="btn btn-outline-secondary" 
       type="button" id="button-addon2">Search</button>
     </div>
+    <select 
+    v-model="type"
+    @change="$emit('sendType', type)"
+    class="form-select" 
+    aria-label="Default select example">
+      <option value="all" selected>All</option>
+      <option value="films">Films</option>
+      <option value="series">Series</option>
+    </select>
   </header>
 </template>
 
@@ -22,6 +31,7 @@ export default {
   data(){
     return{
       filmToSearch: '',
+      type:''
     }
   },
   methods:{
@@ -48,5 +58,9 @@ header{
       flex: none !important;
     }
   } 
+  .form-select{
+    width: 100px;
+    height: 30px;
+  }
 }
 </style>

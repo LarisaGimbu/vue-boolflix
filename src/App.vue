@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <Header @sendSearch="foundFilm"/>
+    <Header @sendSearch="foundFilm"
+    @sendType="foundType"/>
     <Loader v-if="this.loading"/>
     <Main 
     v-if="films.length !== 0 || series.length !== 0"
     :films="films"
-    :series="series"/>
+    :series="series"
+    :type="type"/>
   </div>
 </template>
 
@@ -26,6 +28,7 @@ export default {
     return{
       films: [],
       series: [],
+      type:'',
       apiUrlMovie: 'https://api.themoviedb.org/3/search/movie',
       apiUrlTv: 'https://api.themoviedb.org/3/search/tv',
       apiParams: {
@@ -41,6 +44,7 @@ export default {
     foundFilm(titolo){
       this.apiParams.query = titolo;
       this.loading = true;
+
 
       axios 
         .get(this.apiUrlMovie, {params: this.apiParams})
@@ -63,6 +67,10 @@ export default {
         .catch((error) =>{
           console.log(error);
         })
+    },
+    foundType(tipo){
+      this.type = tipo;
+      console.log(this.type);
     }
   }
 }

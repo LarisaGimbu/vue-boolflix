@@ -1,25 +1,33 @@
 <template>
   <main class="container pt-5 ">
-    <h3>Film:</h3>
-    <div class="film-container d-flex justify-content-center flex-wrap">
-      <Card  
-      v-for="film in films"
-      :key="film.id"
-      :title="film.title"
-      :originalTitle="film.original_title"
-      :language="film.original_language"
-      :vote="film.vote_average"/>
+    <div 
+    v-if="type === 'all' || type === 'films'"
+    class="film-container">
+      <h3>Film:</h3>
+      <div class="d-flex justify-content-center flex-wrap">
+        <Card  
+        v-for="film in films"
+        :key="film.id"
+        :title="film.title"
+        :originalTitle="film.original_title"
+        :language="film.original_language"
+        :vote="film.vote_average"/>
+      </div>
     </div>
 
-    <h3>Serie:</h3>
-    <div class="film-container d-flex justify-content-center flex-wrap">
-      <Card 
-      v-for="serie in series"
-      :key="serie.id"
-      :title="serie.name"
-      :originalTitle="serie.original_name"
-      :language="serie.original_language"
-      :vote="serie.vote_average"/>
+    <div 
+    v-if="type === 'all' || type === 'series'"
+    class="serie-container">
+      <h3>Serie:</h3>
+      <div class="d-flex justify-content-center flex-wrap">
+        <Card 
+        v-for="serie in series"
+        :key="serie.id"
+        :title="serie.name"
+        :originalTitle="serie.original_name"
+        :language="serie.original_language"
+        :vote="serie.vote_average"/>
+      </div>
     </div>
   </main>
 </template>
@@ -39,7 +47,8 @@ export default {
   },
   props:{
     films: Array,
-    series: Array
+    series: Array,
+    type: String
   },
   methods:{
  
