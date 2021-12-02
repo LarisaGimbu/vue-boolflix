@@ -4,8 +4,8 @@
     <div class="film-container d-flex justify-content-center flex-wrap">
       <div
       class="box pe-3" 
-      v-for="(film, index) in films"
-      :key="index">
+      v-for="film in films"
+      :key="film.id">
         <p><strong>Titolo:</strong> {{film.title}}</p>
         <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
         <p v-if="film.original_language==='it'"><strong>Lingua originale:</strong> <img src="../assets/img/it-flag.jpg" alt=""></p> 

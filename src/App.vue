@@ -26,17 +26,24 @@ export default {
     return{
       films: [],
       series: [],
-      apiURL: 'https://api.themoviedb.org/3/search/',
-      apiKey: '9e3e0024fc20b93902720482485f2a3e',
+      apiUrlMovie: 'https://api.themoviedb.org/3/search/movie',
+      apiUrlTv: 'https://api.themoviedb.org/3/search/tv',
+      apiParams: {
+        api_key: '9e3e0024fc20b93902720482485f2a3e',
+        language: 'it-IT',
+        query: ''
+      },
+      
       loading: false
     }
   },
   methods:{
     foundFilm(titolo){
+      this.apiParams.query = titolo;
       this.loading = true;
 
       axios 
-        .get(`${this.apiURL}movie?api_key=${this.apiKey}&query=${titolo}&language=it-IT`)
+        .get(this.apiUrlMovie, {params: this.apiParams})
         .then((response) =>{
           this.films = response.data.results;
           this.loading = false;
@@ -47,7 +54,7 @@ export default {
         })
 
       axios
-        .get(`${this.apiURL}tv?api_key=${this.apiKey}&query=${titolo}&language=it-IT`)
+        .get(this.apiUrlTv, {params: this.apiParams})
         .then((response) =>{
           this.series = response.data.results;
           this.loading = false;
