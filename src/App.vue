@@ -4,9 +4,9 @@
     @sendType="foundType"/>
     <Loader v-if="this.loading"/>
     <Main 
-    v-if="films.length !== 0 || series.length !== 0"
-    :films="films"
-    :series="series"
+    v-if="movie.length !== 0 || tv.length !== 0"
+    :films="movie"
+    :series="tv"
     :type="type"/>
     <h3 v-else
     class="text-center">{{notFound}}</h3>
@@ -28,10 +28,10 @@ export default {
   },
   data(){
     return{
-      films: [],
-      series: [],
+      movie: [],
+      tv: [],
       type:'',
-      apiUrlMovie: 'https://api.themoviedb.org/3/search/movie',
+      apiUrlMovie: 'https://api.themoviedb.org/3/search/',
       apiUrlTv: 'https://api.themoviedb.org/3/search/tv',
       apiParams: {
         api_key: '9e3e0024fc20b93902720482485f2a3e',
@@ -48,24 +48,16 @@ export default {
       this.apiParams.query = titolo;
       this.loading = true;
 
-
-      axios 
-        .get(this.apiUrlMovie, {params: this.apiParams})
+      this.getApi('movie')
+      this.getApi('tv')
+    },
+    getApi(type){
+       axios 
+        .get(this.apiUrlMovie+type, {params: this.apiParams})
         .then((response) =>{
-          this.films = response.data.results;
+          this[type] = response.data.results;
           this.loading = false;
           this.notFound = `Nessun risultato trovato per "${this.apiParams.query}"`
-        })
-        .catch((error) =>{
-          console.log(error);
-        })
-
-      axios
-        .get(this.apiUrlTv, {params: this.apiParams})
-        .then((response) =>{
-          this.series = response.data.results;
-          this.loading = false;
-
         })
         .catch((error) =>{
           console.log(error);
@@ -75,7 +67,7 @@ export default {
       this.type = tipo;
       console.log(this.type);
     }
-  }
+  },
 }
 </script>
 
