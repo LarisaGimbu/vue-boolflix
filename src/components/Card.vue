@@ -59,7 +59,7 @@ export default {
         this.cardImage = `https://image.tmdb.org/t/p/w342${this.image}`;
         
       }else{
-        this.cardImage = 'https://m.media-amazon.com/images/I/41n1xmnsn8L._AC_.jpg';
+        this.cardImage = `https://via.placeholder.com/346x515/000000/FFFFFF/?text=${this.title}`;
       }
     }
   },
@@ -82,9 +82,9 @@ export default {
     }
     
     .flip-card {
-      width: 350px;
+      width: 342px;
       height: 515px;
-      perspective: 1000px; 
+      perspective: 1000px;
     }
     .flip-card-inner {
       position: relative;

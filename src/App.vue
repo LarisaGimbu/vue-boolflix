@@ -8,6 +8,8 @@
     :films="films"
     :series="series"
     :type="type"/>
+    <h3 v-else
+    class="text-center">{{notFound}}</h3>
   </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
         language: 'it-IT',
         query: ''
       },
+      notFound: '',
       
       loading: false
     }
@@ -51,7 +54,7 @@ export default {
         .then((response) =>{
           this.films = response.data.results;
           this.loading = false;
-          
+          this.notFound = `Nessun risultato trovato per "${this.apiParams.query}"`
         })
         .catch((error) =>{
           console.log(error);
