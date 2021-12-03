@@ -1,9 +1,9 @@
 <template>
   <main class="container pt-5 ">
     <div 
-    v-if="type === 'all' || type === 'films' || type === ''"
+    v-if="type === 'all' || type === 'films' || type === '' || films.length != 0"
     class="film-container">
-      <h3>Film:</h3>
+      <h3 v-if="series.length != 0">Film:</h3>
       <div class="d-flex justify-content-center flex-wrap">
         <Card  
         v-for="film in films"
@@ -19,7 +19,7 @@
     <div 
     v-if="type === 'all' || type === 'series' || type === ''"
     class="serie-container">
-      <h3>Serie:</h3>
+      <h3 v-if="series.length != 0">Serie:</h3>
       <div class="d-flex justify-content-center flex-wrap">
         <Card 
         v-for="serie in series"
