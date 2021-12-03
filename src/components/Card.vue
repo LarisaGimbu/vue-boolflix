@@ -7,20 +7,25 @@
           <img :src="cardImage" alt="">
         </div>
         <div class="flip-card-back d-flex flex-column justify-content-center align-items-center">
-          <p><strong>Titolo:</strong> {{title}}</p>
+          <h3>{{title}}</h3>
           <p><strong>Titolo originale:</strong> {{originalTitle}}</p>
           <div><strong>Lingua originale:</strong> 
-            <img v-if="flags.includes(language)" class="img-language" :src="require(`../assets/img/${language}.png`)" alt="">
+            <img v-if="flags.includes(language)" class="img-language ps-2" :src="require(`../assets/img/${language}.png`)" alt="">
             <span v-else>{{language}}</span>
           </div> 
           <p><strong>Voto:</strong>
-            <span >
+            <span class="ps-2">
               <i 
               v-for="(star, index) in 5" :key="index"
               class="fa-star"
               :class="index<=starsNumber? 'fas': 'far'"></i>
             </span>
           </p> 
+          <div class="description container">
+            <strong>Descrizione:</strong>
+            <p v-if="overview != ''">{{overview}}</p>
+            <p v-else>Non disponibile</p>
+          </div>
         </div>
       </div>
     </div>
@@ -38,7 +43,8 @@ export default {
     originalTitle: String,
     language: String,
     vote: Number,
-    image: String
+    image: String,
+    overview: String
   },
   data(){
     return{
@@ -67,7 +73,12 @@ export default {
 .box{
     min-width: 200px;
     .img-language{
-      width: 20px;
+      width: 25px;
+    }
+    .description{
+      overflow-y: scroll;
+      height: 250px;
+      font-size: 0.8rem;
     }
     
     .flip-card {

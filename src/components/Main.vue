@@ -1,7 +1,7 @@
 <template>
   <main class="container pt-5 ">
     <div 
-    v-if="type === 'all' || type === 'films' || type === '' || films.length != 0"
+    v-if="type === 'all' || type === 'films' || type === ''"
     class="film-container">
       <h3 v-if="series.length != 0">Film:</h3>
       <div class="d-flex justify-content-center flex-wrap">
@@ -12,7 +12,8 @@
         :originalTitle="film.original_title"
         :language="film.original_language"
         :vote="film.vote_average"
-        :image="film.poster_path"/>
+        :image="film.poster_path"
+        :overview="film.overview"/>
       </div>
     </div>
 
@@ -28,7 +29,8 @@
         :originalTitle="serie.original_name"
         :language="serie.original_language"
         :vote="serie.vote_average"
-        :image="serie.poster_path"/>
+        :image="serie.poster_path"
+        :overview="serie.overview"/>
       </div>
     </div>
   </main>
