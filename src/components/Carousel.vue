@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <h3>Nuove usicte:</h3>
+    <h3>I più popolari:</h3>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button 

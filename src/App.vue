@@ -3,9 +3,23 @@
     <Header @sendSearch="foundFilm"
     @sendType="foundType"/>
     <Loader v-if="this.loading"/>
-    <Carousel 
-    v-if="movie.length == 0 && tv.length == 0"
-    :populars="populars"/>
+
+    <div class="home"
+    v-if="movie.length == 0 && tv.length == 0">
+      <Carousel :populars="populars"/>
+      <div class="d-flex justify-content-center flex-wrap mt-5">
+        <Card 
+        v-for="popular in populars"
+        :key="popular.id"
+        :title="popular.title"
+        :originalTitle="popular.original_title"
+        :language="popular.original_language"
+        :vote="popular.vote_average"
+        :image="popular.poster_path"
+        :overview="popular.overview"/>
+      </div>
+      
+    </div>
 
 
     <Main 
@@ -25,6 +39,7 @@ import Main from './components/Main.vue'
 import Loader from './components/Loader.vue'
 import axios from 'axios'
 import Carousel from './components/Carousel.vue'
+import Card from './components/Card.vue'
 
 export default {
   name: 'App',
@@ -32,7 +47,8 @@ export default {
     Header,
     Loader,
     Main,
-    Carousel
+    Carousel,
+    Card
   },
   data(){
     return{
@@ -83,8 +99,6 @@ export default {
       .then((response) =>{
         this.loading = false;
         this.populars = response.data.results;
-
-        console.log(this.popular.results);
       })
       .catch((error) =>{
           console.log(error);
