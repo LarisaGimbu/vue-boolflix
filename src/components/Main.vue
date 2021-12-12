@@ -42,7 +42,7 @@ import Card from './Card.vue'
 export default {
   name: 'Main',
   components:{
-    Card
+    Card,
   },
   data(){
     return{
